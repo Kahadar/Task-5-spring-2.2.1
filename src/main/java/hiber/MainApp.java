@@ -51,8 +51,8 @@ public class MainApp {
       System.out.println(target.getLastName());
       System.out.println("-----------------------");
 
-      //зачистка. хочешь глянуть таблицы - закоменти
-      userService.dropAll();
+      //зачистка вручную
+//      userService.dropAll();
 
       context.close();
 
