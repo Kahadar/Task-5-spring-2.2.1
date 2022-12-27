@@ -1,14 +1,25 @@
 package hiber.model;
 
-import javax.persistence.*;
 
+import javax.persistence.*;
 @Entity
 @Table(name = "users")
+
 public class User {
+
+//   Using a Shared Primary Key
+//   Из этого замечательного хауту
+//   https://howtodoinjava.com/hibernate/hibernate-one-to-one-mapping/#4-using-a-shared-primary-key
+
+   @OneToOne(cascade = CascadeType.ALL)
+   @PrimaryKeyJoinColumn
+   private Car car;
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
+   @Column(name = "id", nullable = false, insertable = true, updatable = true)
+   private int id;
+
 
    @Column(name = "name")
    private String firstName;
@@ -19,19 +30,27 @@ public class User {
    @Column(name = "email")
    private String email;
 
+   public Car getCar() {
+      return car;
+   }
+
+   public void setCar(Car car) {
+      this.car = car;
+   }
    public User() {}
    
-   public User(String firstName, String lastName, String email) {
+   public User( String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
    }
 
-   public Long getId() {
+
+   public int getId() {
       return id;
    }
 
-   public void setId(Long id) {
+   public void setId(int id) {
       this.id = id;
    }
 
@@ -58,4 +77,5 @@ public class User {
    public void setEmail(String email) {
       this.email = email;
    }
+
 }
